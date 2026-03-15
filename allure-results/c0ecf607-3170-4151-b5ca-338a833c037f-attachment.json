@@ -1,0 +1,11 @@
+{
+    "categories": [
+        "animal"
+    ],
+    "created_at": "2020-01-05 13:42:19.576875",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "9ovbd5b1t66_x92jwrq1yq",
+    "updated_at": "2020-01-05 13:42:19.576875",
+    "url": "https://api.chucknorris.io/jokes/9ovbd5b1t66_x92jwrq1yq",
+    "value": "Chuck Norris once rode a bull, and nine months later it had a calf."
+}

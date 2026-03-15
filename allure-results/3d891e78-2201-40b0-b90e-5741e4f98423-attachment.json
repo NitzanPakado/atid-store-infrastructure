@@ -1,0 +1,11 @@
+{
+    "categories": [
+        "animal"
+    ],
+    "created_at": "2020-01-05 13:42:19.104863",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "o0sukejatqchi7oyjms6mw",
+    "updated_at": "2020-01-05 13:42:19.104863",
+    "url": "https://api.chucknorris.io/jokes/o0sukejatqchi7oyjms6mw",
+    "value": "Chuck Norris can set ants on fire with a magnifying glass. At night."
+}

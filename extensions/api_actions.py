@@ -12,12 +12,13 @@ class APIActions:
 
 
     @allure.step("Send GET request to {url}")
-    def get(self, url: str, params: Optional[dict] = None, headers: Optional[dict] = None):
+    def get(self, url: str, params: Optional[dict] = None, headers: Optional[dict] = None, log_response=None):
         """
         Send a GET request to the specified URL with optional parameters and headers.
         """
         response = self.request_context.get(url, params=params, headers=headers)
-        self._log_response(response)  # Log the response
+        if log_response:
+            self._log_response(response)  # Log the response
         return response
     
 

@@ -1,0 +1,11 @@
+{
+    "categories": [
+        "movie"
+    ],
+    "created_at": "2020-01-05 13:42:19.576875",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "zc2g3me0rnqbfankmo99hq",
+    "updated_at": "2020-01-05 13:42:19.576875",
+    "url": "https://api.chucknorris.io/jokes/zc2g3me0rnqbfankmo99hq",
+    "value": "MacGyver immediately tried to make a bomb out of some Q-Tips and Gatorade, but Chuck Norris roundhouse-kicked him in the solar plexus. MacGyver promptly threw up his own heart."
+}

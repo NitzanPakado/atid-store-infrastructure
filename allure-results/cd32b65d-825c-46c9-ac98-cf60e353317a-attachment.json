@@ -1,0 +1,11 @@
+{
+    "categories": [
+        "movie"
+    ],
+    "created_at": "2020-01-05 13:42:19.324003",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "te2c64-ls3owmuy5amehtg",
+    "updated_at": "2020-01-05 13:42:19.324003",
+    "url": "https://api.chucknorris.io/jokes/te2c64-ls3owmuy5amehtg",
+    "value": "The original title for Alien vs. Predator was Alien and Predator vs Chuck Norris. The film was cancelled shortly after going into preproduction. No one would pay nine dollars to see a movie fourteen seconds long."
+}
