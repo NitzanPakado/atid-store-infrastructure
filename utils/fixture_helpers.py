@@ -1,6 +1,7 @@
 import allure
 from playwright.sync_api import Browser, Playwright
 from utils.common_ops import load_config
+import os
 CONFIG = load_config()
 
 TRACES_DIR = CONFIG.get("TRACES_DIR")
