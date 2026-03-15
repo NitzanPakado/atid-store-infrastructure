@@ -47,3 +47,9 @@ class UIActions:
         element.fill("")  # clear first (more stable)
         element.fill(text, timeout=timeout)
 
+    @staticmethod
+    @allure.step("Select option by value: '{value}'")
+    def select_by_value(element: Locator, value: str, timeout: int = DEFAULT_TIMEOUT) -> None:
+        element.wait_for(state="visible", timeout=timeout)
+        element.select_option(value=value, timeout=timeout)
+

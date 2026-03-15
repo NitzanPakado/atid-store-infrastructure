@@ -27,3 +27,22 @@ def read_data_from_csv(file_path):
         for row in reader:
             data.append(row)
      return data
+
+def read_data_from_db(db_path, query):
+     """Reads data from an SQLite database and returns a list of dictionaries."""
+     data = []
+     try:
+         import sqlite3
+         conn = sqlite3.connect(db_path)
+         conn.row_factory = sqlite3.Row  # This enables column access by name
+         cursor = conn.cursor()
+         cursor.execute(query)
+         rows = cursor.fetchall()
+         
+         for row in rows:
+             data.append(dict(row))
+             
+         conn.close()
+     except Exception as e:
+         print(f"Error reading from DB {db_path}: {e}")
+     return data

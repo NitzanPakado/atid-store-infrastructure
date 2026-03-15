@@ -1,6 +1,7 @@
-from playwright.sync_api import Locator, expect
 from smart_assertions import soft_assert, verify_expectations
 import allure
+import re
+from playwright.sync_api import Locator, expect, Page
 
 class WebVerify:
   
@@ -58,6 +59,50 @@ class WebVerify:
         """
         expect(element).to_have_value(expected_value)
 
+    @staticmethod
+    @allure.step("Verify that the input has text and report bug if not")
+    def input_value_bug_check(element: Locator, expected: str):
+        """
+        Verifies that the value of the element matches the expected value.
+        If not, reports a bug specifically for invalid input acceptance.
+        """
+        actual = element.input_value()
+        assert actual == expected, f"Expected quantity {expected} but found {actual} (Bug: Invalid input was accepted)"
+    
+    @staticmethod
+    @allure.step("Verify that the element has the expected value")
+    def value_numeric(element: Locator, expected_value: int):
+        """
+        Verifies that the value of the element matches the expected value.
+        """
+        expect(element).to_have_value(str(expected_value))
+
+    @staticmethod
+    @allure.step("Verify that the URL contains the expected text")
+    def url_contains(page: Page, expected_text: str):
+        """
+        Verifies that the current URL contains the expected text.
+        """
+        expect(page).to_have_url(re.compile(f".*{expected_text}.*"))
+    
+
+
+    @staticmethod
+    @allure.step("Verify that the element is disabled")
+    def disabled(element: Locator):
+        """
+        Verifies that the element is disabled.
+        """
+        expect(element).to_be_disabled()
+
+    @staticmethod
+    @allure.step("Verify that the element is enabled")
+    def enabled(element: Locator):
+        """
+        Verifies that the element is enabled.
+        """
+        expect(element).to_be_enabled()
+
 
     # Soft Assertions    
     @staticmethod
@@ -84,7 +129,3 @@ class WebVerify:
     def soft_all():
         """Raises all collected assertion errors at once."""
         verify_expectations()
-
-
-
-        

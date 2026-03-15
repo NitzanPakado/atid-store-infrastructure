@@ -1,0 +1,4 @@
+search_term,expected_result
+ATID Blue Shoes,found
+Invalid Product,not_found
+Anchor Bracelet,found
