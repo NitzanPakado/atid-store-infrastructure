@@ -10,6 +10,9 @@ from data.web.atid_store_data import *
 from utils.common_ops import load_config
 from utils.fixture_helpers import attach_screenshot, attach_trace, get_browser
 from workflows.web.atid_flows import AtidFlows
+from utils.fixture_helpers import get_browser
+from workflows.api.chuck_api_flows import ChuckApiFlows
+from workflows.web.chuck_ui_flows import ChuckUIFlows
 
 # Load the configuration
 CONFIG = load_config()     
@@ -32,10 +35,14 @@ def page(playwright: Playwright, request:FixtureRequest):
     browser.close()
 
 
+
 @pytest.fixture
 def atid_flows(page):
     page.goto(ATID_URL)
     return AtidFlows(page)
+
+def chuck_ui_flows(page):
+    return ChuckUIFlows(page)
 
 
 

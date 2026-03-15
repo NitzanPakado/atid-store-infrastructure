@@ -1,0 +1,11 @@
+{
+    "categories": [
+        "animal"
+    ],
+    "created_at": "2020-01-05 13:42:19.104863",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "30lywvzfsowzxkiiy2voyw",
+    "updated_at": "2020-01-05 13:42:19.104863",
+    "url": "https://api.chucknorris.io/jokes/30lywvzfsowzxkiiy2voyw",
+    "value": "Chuck Norris does not own a house. He walks into random houses and people move."
+}
