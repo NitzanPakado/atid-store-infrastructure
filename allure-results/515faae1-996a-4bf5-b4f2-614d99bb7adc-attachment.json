@@ -1,0 +1,11 @@
+{
+    "categories": [
+        "animal"
+    ],
+    "created_at": "2020-01-05 13:42:19.104863",
+    "icon_url": "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "id": "zjuwql5ns-mklqumqezlhg",
+    "updated_at": "2020-01-05 13:42:19.104863",
+    "url": "https://api.chucknorris.io/jokes/zjuwql5ns-mklqumqezlhg",
+    "value": "Chuck Norris can skeletize a cow in two minutes."
+}
