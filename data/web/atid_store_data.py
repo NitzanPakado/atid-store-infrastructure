@@ -4,6 +4,7 @@ MEN_CATEGORY_URL = "https://atid.store/product-category/men/"
 ACCESSORIES_CATEGORY_URL = "https://atid.store/product-category/accessories/"
 CART_URL = "https://atid.store/cart/"
 STORE_URL = "https://atid.store/store/"
+ABOUT_URL = "https://atid.store/about/"
 
 # File Paths & Data Sources
 SEARCH_TERMS_PATH = "data/ddt/search_data.csv"
@@ -43,6 +44,10 @@ QTY_LARGE = "9999"
 QTY_NON_NUMERIC = "abc"
 EXPECTED_MEN_PRODUCTS_COUNT = 12
 RESET_QTY_VALUE = "1"
+
+# AI Visual Verification Data
+KIM_ROLE = "Intern Designer"
+AI_ROLE_PROMPT = "What is the precise role or job title written directly below the person's name in this image? Return only that text."
 
 # Keyboard/System
 ENTER_KEY = "Enter"

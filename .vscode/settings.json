@@ -1,9 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        ".",
-        "-s",
-        "-v",
-        "--alluredir=./allure-results"
+        "-v"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true

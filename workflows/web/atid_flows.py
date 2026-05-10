@@ -5,6 +5,8 @@ from extensions.web_verifications import WebVerify
 from page_objects.web.atid_home_page import AtidHomePage
 from page_objects.web.atid_men_page import AtidMenPage
 from page_objects.web.atid_cart_page import AtidCartPage
+from page_objects.web.atid_about_page import AtidAboutPage
+from extensions.ai_verifications import AIVerify
 from data.web.atid_store_data import *
 
 class AtidFlows:
@@ -13,6 +15,7 @@ class AtidFlows:
         self.home = AtidHomePage(page)
         self.men = AtidMenPage(page)
         self.cart = AtidCartPage(page)
+        self.about = AtidAboutPage(page)
 
     @allure.step("Navigate to Home:")
     def go_to_home(self):
@@ -25,6 +28,10 @@ class AtidFlows:
     @allure.step("Navigate to Accessories Page:")
     def go_to_accessories_page(self):
         UIActions.navigate_to(self.page, ACCESSORIES_CATEGORY_URL)
+
+    @allure.step("Navigate to About Page:")
+    def go_to_about_page(self):
+        UIActions.navigate_to(self.page, ABOUT_URL)
 
     @allure.step("Navigate to Cart Page:")
     def go_to_cart_page(self):
@@ -50,7 +57,8 @@ class AtidFlows:
     @allure.step("Update quantity in cart:")
     def update_cart_quantity(self, quantity: int):
         self.cart.quantity_input.focus()
-        current = int(self.cart.quantity_input.input_value())
+        current_text = UIActions.get_text(self.cart.quantity_input)
+        current = int(current_text) if current_text else 1
         for _ in range(quantity - current):
             self.page.keyboard.press(ARROW_UP_KEY)
         UIActions.click(self.cart.update_cart_button)
@@ -92,8 +100,8 @@ class AtidFlows:
 
     @allure.step("Set quantity in cart directly:")
     def set_quantity(self, quantity: str):
-        # Set value via JS and dispatch change event to notify the page
-        self.cart.quantity_input.evaluate(f"el => {{ el.value = '{quantity}'; el.dispatchEvent(new Event('change', {{ bubbles: true }})); }}")
+        # Set value via JS and dispatch change event to notify the page using UI Actions
+        UIActions.set_value_js(self.cart.quantity_input, quantity)
         # Use force_click in case the button is disabled by browser validation
         UIActions.force_click(self.cart.update_cart_button)
 
@@ -121,8 +129,8 @@ class AtidFlows:
 
     @allure.step("Verify search result for: {term}")
     def verify_product_search_result(self, term: str, expected_result: str):
-        # Look for the product name within the main content area
-        product_locator = self.men.search_results_container.locator(f"text={term}").first
+        # Look for the product name within the main content area using the POM
+        product_locator = self.men.get_search_result_by_name(term)
         if expected_result == SEARCH_TERM_SUCCESS:
             WebVerify.visible(product_locator)
         else:
@@ -180,21 +188,27 @@ class AtidFlows:
 
     @allure.step("Verify prices are sorted Low to High")
     def verify_prices_sorted_low_to_high(self):
-        # Get all price containers (one per product)
-        price_containers = self.page.locator(".product .price").all()
-        prices = []
-        for container in price_containers:
-            # If sale price exists, it's inside <ins>. Otherwise, it's just in .amount
-            sale_price = container.locator("ins .amount")
-            if sale_price.count() > 0:
-                price_text = sale_price.inner_text()
-            else:
-                price_text = container.locator(".amount").inner_text()
-            
-            # Clean currency symbols and convert to float
-            val = float(price_text.replace('₪', '').replace(',', '').strip())
-            prices.append(val)
+        # 1. Get price container locators from the Page Object Model
+        price_containers = self.men.product_price_containers
         
-        # Check if sorted: each element is <= previous
-        is_sorted = all(prices[i] <= prices[i+1] for i in range(len(prices)-1))
-        assert is_sorted, f"Prices are not sorted Low to High: {prices}"
+        # 2. Extract the actual floating point prices using UI Actions
+        prices = UIActions.get_effective_prices(price_containers)
+        
+        # 3. Verify the array is sorted Low to High using Web Verifications
+        WebVerify.is_sorted_ascending(prices, f"Prices are not sorted Low to High: {prices}")
+
+    @allure.step("Verify Kim Kardashian role using AI: {expected_role}")
+    def verify_kim_kardashian_role_with_ai(self, expected_role: str):
+        # 1. Get the container element for the member
+        member_container = self.about.kim_kardashian_card
+        
+        # 2. Scroll to it so it's fully visible
+        member_container.scroll_into_view_if_needed()
+        
+        # 3. Take a screenshot of the specific element
+        screenshot_path = "screenshot_kim_kardashian.png"
+        member_container.screenshot(path=screenshot_path)
+        
+        # 4. Call the AI verifier with the screenshot, prompt, and expected text
+        AIVerify.verify_image_content(screenshot_path, AI_ROLE_PROMPT, expected_role)
+

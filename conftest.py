@@ -10,7 +10,6 @@ from data.web.atid_store_data import *
 from utils.common_ops import load_config
 from utils.fixture_helpers import attach_screenshot, attach_trace, get_browser
 from workflows.web.atid_flows import AtidFlows
-from utils.fixture_helpers import get_browser
 from workflows.api.chuck_api_flows import ChuckApiFlows
 from workflows.web.chuck_ui_flows import ChuckUIFlows
 
@@ -36,15 +35,12 @@ def page(playwright: Playwright, request:FixtureRequest):
 
 
 
+
 @pytest.fixture(scope= "class")
 def request_context(playwright: Playwright, request:FixtureRequest):
     request_context=playwright.request.new_context(base_url=CHUCK_BASE_URL)
     yield request_context
     request_context.dispose()
-from data.api.chuck_api_data import *
-
-
-
 
 @pytest.fixture
 def atid_flows(page):
@@ -54,7 +50,6 @@ def atid_flows(page):
 @pytest.fixture
 def chuck_ui_flows(page):
     return ChuckUIFlows(page)
-
 
 @pytest.fixture
 def chuck_flows(request_context):

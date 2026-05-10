@@ -104,6 +104,15 @@ class WebVerify:
         expect(element).to_be_enabled()
 
 
+    @staticmethod
+    @allure.step("Verify that the list of numeric values is sorted in ascending order")
+    def is_sorted_ascending(values: list[float], error_message: str):
+        """
+        Verifies that a given list of numbers is sorted in ascending order.
+        """
+        is_sorted = all(values[i] <= values[i+1] for i in range(len(values)-1))
+        assert is_sorted, error_message
+
     # Soft Assertions    
     @staticmethod
     @allure.step("Soft assertion to check if the element has the expected text")

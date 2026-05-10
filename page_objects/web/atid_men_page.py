@@ -16,3 +16,8 @@ class AtidMenPage:
         self.category_title = page.locator(".woocommerce-products-header__title")
         self.sorting_dropdown = page.locator("select.orderby")
         self.product_prices = page.locator(".price .amount")
+        self.product_price_containers = page.locator(".product .price")
+
+    def get_search_result_by_name(self, term: str):
+        """Returns the locator for a specific product name in the search results container."""
+        return self.search_results_container.locator(f"text={term}").first
